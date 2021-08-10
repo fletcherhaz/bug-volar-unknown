@@ -13,7 +13,7 @@
     <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
   </p>
 
-  <button @click="count++">count is: {{ count }}</button>
+  <slot :state="test.state" :updateState="test.updateState"/>
   <p>
     Edit
     <code>components/HelloWorld.vue</code> to test hot module replacement.
@@ -23,11 +23,19 @@
 <preview msg="Hello Volar!"></preview>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { PropType, ref } from 'vue'
+import { Generic } from '../App.vue'
 
-defineProps<{ msg: string }>()
-
-const count = ref(0)
+defineProps({
+  msg: {
+    type: String,
+    required: true
+  },
+  test: {
+    type: Object as PropType<Generic<unknown>>,
+    required: true
+  }
+})
 </script>
 
 <style scoped>
